@@ -1,0 +1,25 @@
+{
+  "name": "roastathon-chat-web",
+  "version": "1.0.0",
+  "description": "A web interface for generating humorous roasts and images using the Gemini and NanoBanana APIs.",
+  "main": "src/js/main.js",
+  "scripts": {
+    "start": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "vite": "^2.0.0"
+  },
+  "devDependencies": {
+    "dotenv": "^10.0.0"
+  },
+  "keywords": [
+    "chat",
+    "roast",
+    "API",
+    "humor"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}

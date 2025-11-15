@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Roastathon — Creative AI Chat</title>
+  <link rel="stylesheet" href="../src/css/styles.css" />
+</head>
+<body>
+  <div class="container" id="app">
+    <header class="header" role="banner">
+      <div>
+        <h1>Roastathon</h1>
+        <div class="meta">Creative AI chat — say something and get roasted</div>
+      </div>
+
+      <div style="display:flex;gap:8px;align-items:center;">
+        <button id="clearBtn" class="secondary" title="Clear conversation">Clear</button>
+      </div>
+    </header>
+
+    <main class="chat-history" id="chatHistory" role="log" aria-live="polite">
+      <div class="empty">Say hi — the roast bot is waiting.</div>
+    </main>
+
+    <form id="inputForm" class="input-area" autocomplete="off" role="form">
+      <input id="messageInput" type="text" name="message" placeholder="Type something to roast..." aria-label="Message" />
+      <button id="sendBtn" type="submit" title="Send">Send</button>
+    </form>
+  </div>
+
+   <script>
+    window.ROAST_CONFIG = {
+      GEMINI_API_KEY: "YOUR_GEMINI_API_KEY_HERE",
+      NANOBANANA_API_KEY: "YOUR_NANOBANANA_API_KEY_HERE"
+    };
+  </script>
+
+  <script type="module" src="../src/js/api.js" defer></script>
+  <script type="module" src="../src/js/main.js" defer></script>
+</body>
+</html>
