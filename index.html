@@ -1,42 +1,144 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Roastathon — Creative AI Chat</title>
-  <link rel="stylesheet" href="../src/css/styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roastathon - AI Chat</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="container" id="app">
-    <header class="header" role="banner">
-      <div>
-        <h1>Roastathon</h1>
-        <div class="meta">Creative AI chat — say something and get roasted</div>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <button class="new-chat-btn" id="newChatBtn">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M8 3V13M3 8H13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <span>New chat</span>
+        </button>
+      </div>
+      
+      <div class="conversations-list" id="conversationsList">
+        <!-- Conversations will be dynamically added here -->
+      </div>
+      
+      <div class="sidebar-footer">
+        <button class="sidebar-item" id="settingsBtn">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M8 10a2 2 0 100-4 2 2 0 000 4z" fill="currentColor"/>
+            <path d="M13.5 8.5a.5.5 0 00-.5-.5h-1.057a3.5 3.5 0 00-.67-1.545l.748-.748a.5.5 0 00-.708-.708l-.748.748A3.5 3.5 0 009.557 4.5H8.5a.5.5 0 000 1h1.057a2.5 2.5 0 01.479 1.103l-.748.748a.5.5 0 00.708.708l.748-.748A2.5 2.5 0 0110.943 9H12a.5.5 0 00.5-.5zM6.443 9A3.5 3.5 0 005.773 7.455l-.748.748a.5.5 0 01-.708-.708l.748-.748A3.5 3.5 0 003.557 4.5H2.5a.5.5 0 000 1h1.057a2.5 2.5 0 01.479 1.103l-.748.748a.5.5 0 00.708.708l.748-.748A2.5 2.5 0 015.057 9H6.443z" fill="currentColor"/>
+          </svg>
+          <span>Settings</span>
+        </button>
+        <button class="sidebar-item" id="helpBtn">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M8 14A6 6 0 118 2a6 6 0 010 12zM8 4a4 4 0 100 8 4 4 0 000-8z" fill="currentColor"/>
+            <path d="M8 12a1 1 0 100-2 1 1 0 000 2zM7 7h1v4H7V7z" fill="currentColor"/>
+          </svg>
+          <span>Help & FAQ</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content" id="mainContent">
+      <!-- Chat Header -->
+      <header class="chat-header">
+        <button class="menu-toggle" id="menuToggle">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <h1 class="chat-title" id="chatTitle">New Chat</h1>
+        <button class="header-btn" id="editChatBtn" title="Edit chat title">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M11.333 2.667a1.333 1.333 0 011.886 1.886l-8 8a1.333 1.333 0 01-.943.391H3.333a1.333 1.333 0 01-1.334-1.334V9.724c0-.354.14-.693.39-.943l8-8z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </header>
+
+      <!-- Chat Messages Area -->
+      <div class="chat-messages" id="chatMessages">
+        <div class="empty-state" id="emptyState">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" class="empty-icon">
+            <circle cx="24" cy="24" r="20" stroke="currentColor" stroke-width="2" opacity="0.3"/>
+            <path d="M24 16v8m0 8h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+          </svg>
+          <h2>How can I roast you today?</h2>
+          <p>Ask me anything, and I'll give you a proper roasting!</p>
+        </div>
       </div>
 
-      <div style="display:flex;gap:8px;align-items:center;">
-        <button id="clearBtn" class="secondary" title="Clear conversation">Clear</button>
+      <!-- Input Area -->
+      <div class="input-container">
+        <form class="input-form" id="inputForm">
+          <div class="input-wrapper">
+            <textarea 
+              id="messageInput" 
+              class="message-input" 
+              placeholder="Message Roastathon..."
+              rows="1"
+            ></textarea>
+            <button type="submit" class="send-btn" id="sendBtn" disabled>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M3 10h14M10 3l7 7-7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+          <div class="input-footer">
+            <p class="disclaimer">Roastathon can make mistakes. Check important info.</p>
+          </div>
+        </form>
       </div>
-    </header>
-
-    <main class="chat-history" id="chatHistory" role="log" aria-live="polite">
-      <div class="empty">Say hi — the roast bot is waiting.</div>
     </main>
 
-    <form id="inputForm" class="input-area" autocomplete="off" role="form">
-      <input id="messageInput" type="text" name="message" placeholder="Type something to roast..." aria-label="Message" />
-      <button id="sendBtn" type="submit" title="Send">Send</button>
-    </form>
+    <!-- Settings Modal -->
+    <div class="modal-overlay" id="settingsModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Settings</h2>
+          <button class="modal-close" id="closeSettingsBtn">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M5 5l10 10M15 5l-10 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="setting-item">
+            <label for="apiKeyInput">Gemini API Key</label>
+            <input 
+              type="password" 
+              id="apiKeyInput" 
+              class="setting-input" 
+              placeholder="Enter your Gemini API key"
+            />
+            <p class="setting-description">Your API key is stored locally. Alternatively, set VITE_GEMINI_API_KEY in your .env file.</p>
+          </div>
+          <div class="setting-item">
+            <label>Roasting Style</label>
+            <select id="roastStyleSelect" class="setting-select">
+              <option value="witty">Witty & Sarcastic</option>
+              <option value="playful">Playful & Mocking</option>
+              <option value="savage">Savage & Brutal</option>
+              <option value="humorous">Humorous & Fun</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-primary" id="saveSettingsBtn">Save</button>
+        </div>
+      </div>
+    </div>
   </div>
 
-   <script>
+  <script>
     window.ROAST_CONFIG = {
-      GEMINI_API_KEY: "YOUR_GEMINI_API_KEY_HERE",
-      NANOBANANA_API_KEY: "YOUR_NANOBANANA_API_KEY_HERE"
+      GEMINI_API_KEY: localStorage.getItem('gemini_api_key') || '',
+      ROAST_STYLE: localStorage.getItem('roast_style') || 'witty'
     };
   </script>
-
-  <script type="module" src="../src/js/api.js" defer></script>
-  <script type="module" src="../src/js/main.js" defer></script>
+  <script type="module" src="api.js"></script>
+  <script type="module" src="main.js"></script>
 </body>
 </html>
